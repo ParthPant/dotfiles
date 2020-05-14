@@ -22,12 +22,10 @@ noremap k j
 noremap j h
 
 nmap <C-p> :Files<CR>
-
+nmap t <Plug>(coc-terminal-toggle)
 colorscheme gruvbox
 
-set guifont=DejaVu\ Sans\ Mono
-
-"-----------------------------------------------------------------------------
+"----------------------------------------------------------------------------
 " TextEdit might fail if hidden is not set.
 set hidden
 
