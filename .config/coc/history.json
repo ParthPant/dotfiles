@@ -1,0 +1,31 @@
+{
+  "marketplace": {
+    "%2Fhome%2Fparthp": [
+      "js",
+      "highl",
+      "react",
+      "julia"
+    ],
+    "%2Fhome%2Fparthp%2Fdev%2Fwebsite2020-21": [
+      "react"
+    ],
+    "%2Fhome%2Fparthp%2Fdev%2Fcode-tester": [
+      "web",
+      "react",
+      "style",
+      "stye",
+      "svg",
+      "mark"
+    ],
+    "%2Fhome%2Fparthp%2Fdev%2Finkscape": [
+      "c++",
+      "clang"
+    ],
+    "%2Fhome%2Fparthp%2Fdev%2Fpygame": [
+      "pytho"
+    ],
+    "%2Fhome%2Fparthp%2Fdev%2FbreakoutGL%2Fsrc": [
+      "cmake"
+    ]
+  }
+}

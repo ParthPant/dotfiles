@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "coc-clangd": ">=0.4.13",
+    "coc-cmake": ">=0.0.2",
+    "coc-highlight": ">=1.2.5",
+    "coc-json": ">=1.2.6",
+    "coc-julia": ">=0.4.2",
+    "coc-marketplace": ">=1.7.0",
+    "coc-pairs": ">=1.2.21",
+    "coc-python": ">=1.2.12",
+    "coc-styled-components": ">=0.3.0",
+    "coc-svg": ">=0.0.13",
+    "coc-tsserver": ">=1.5.5",
+    "coc-webpack": ">=1.4.0"
+  }
+}

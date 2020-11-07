@@ -109,7 +109,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Fantasque Sans Mono 
+    family: Roboto Mono 
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -148,7 +148,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 16
+  size: 13
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -568,3 +568,4 @@ background_opacity: 0.90
   #- { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
   #- { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
   #- { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
+
