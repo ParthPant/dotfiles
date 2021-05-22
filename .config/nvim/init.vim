@@ -14,24 +14,33 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+Plug 'preservim/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'wakatime/vim-wakatime'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
+Plug 'nvim-lua/popup.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"Colorshemes
 Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'danilo-augusto/vim-afterglow'
 Plug 'dracula/vim'
-Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
+
 Plug 'preservim/nerdcommenter'
+
+"Specifically webdev related plugins
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'digitaltoad/vim-pug'
 call plug#end()
 
-colorscheme gruvbox
-highlight Normal ctermbg=None
+colorscheme gruvbox 
+"highlight Normal ctermbg=None
 set number
 set nowrap
 set relativenumber
@@ -72,6 +81,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gt :CocCommand clangd.switchSourceHeader <CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -111,13 +121,13 @@ autocmd VimEnter *
             \ | endif
 
 inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-e> :CocCommand explorer<CR>
+"nmap <C-n> :NERDTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
 "FZF binding
 nmap <C-p> :FZF<CR>
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
 "Tabs
 filetype plugin indent on
@@ -127,27 +137,31 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+set scrolloff=5
 
 "Indentation
 "let g:indentLine_setColors = 0
 "let g:indentLine_color_term = 239
 "let g:indentLine_defaultGroup = 'SpecialKey'
+let g:indentLine_enabled=0
+nmap <C-i> :IndentLinesToggle<CR>
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+nmap <TAB> :Tagbar<CR>
 
 "Icons
-set encoding=UTF-8
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
+"set encoding=UTF-8
+"let g:NERDTreeGitStatusIndicatorMapCustom = {
+                "\ 'Modified'  :'✹',
+                "\ 'Staged'    :'✚',
+                "\ 'Untracked' :'✭',
+                "\ 'Renamed'   :'➜',
+                "\ 'Unmerged'  :'═',
+                "\ 'Deleted'   :'✖',
+                "\ 'Dirty'     :'✗',
+                "\ 'Ignored'   :'☒',
+                "\ 'Clean'     :'✔︎',
+                "\ 'Unknown'   :'?',
+                "\ }
 
 "Git
 nmap <C-g> :GitGutterBufferToggle<CR>
@@ -175,3 +189,36 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \}
+
+augroup SyntaxSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+augroup END
+
+" Explorer
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'pwd': {
+\     'root-uri': getcwd(),
+\   },
+\ }
+
+nmap <C-n> :CocCommand explorer<CR>
+"nmap <space>f :CocCommand explorer --preset floating<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+set exrc
+set secure
