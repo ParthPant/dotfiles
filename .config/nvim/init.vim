@@ -17,7 +17,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'preservim/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'wakatime/vim-wakatime'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/popup.nvim'
@@ -32,6 +31,9 @@ Plug 'danilo-augusto/vim-afterglow'
 Plug 'dracula/vim'
 
 Plug 'preservim/nerdcommenter'
+
+"C++ syntax highlighting
+Plug 'bfrg/vim-cpp-modern'
 
 "Specifically webdev related plugins
 Plug 'maxmellon/vim-jsx-pretty'
@@ -129,6 +131,7 @@ nmap ++ <plug>NERDCommenterToggle
 nmap <C-p> :FZF<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
+syntax enable
 "Tabs
 filetype plugin indent on
 " show existing tab with 4 spaces width
