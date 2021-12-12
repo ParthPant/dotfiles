@@ -36,6 +36,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+  require "lsp_signature".on_attach()
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
@@ -97,5 +98,22 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'nvim_lua' },
   },
 }
+
+-- tree sitter configs
+local tsconfig = require'nvim-treesitter.configs'
+tsconfig.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  indend = {
+    enable = true,
+  }
+}
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 20

@@ -8,7 +8,10 @@ return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
     -- necessary
-    use 'itchyny/lightline.vim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
     use 'tpope/vim-fugitive'
     use 'tpope/vim-surround'
     use 'tpope/vim-sleuth'
@@ -40,6 +43,7 @@ return require('packer').startup(function()
 
     -- color
     use 'morhetz/gruvbox'
+    use 'rafamadriz/neon'
     
     -- navigation
     use {
@@ -58,6 +62,9 @@ return require('packer').startup(function()
     use 'neovim/nvim-lspconfig'
     use 'folke/lsp-colors.nvim'
     use 'simrat39/symbols-outline.nvim'
+    use {
+      "ray-x/lsp_signature.nvim",
+    }
 
     -- autocompletion
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
@@ -68,5 +75,11 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-nvim-lua'
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
+    -- treesitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 end)
 

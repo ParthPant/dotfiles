@@ -3,6 +3,7 @@ require("lib.plugins")
 require("lib.nvim-tree-config")
 require("lib.lsp")
 require("lib.git")
+require("lib.line")
 
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -15,7 +16,13 @@ vim.opt.colorcolumn = '+1'
 vim.opt.scrolloff = 5
 vim.opt.hlsearch = false
 
-vim.g.colors_name = 'gruvbox'
+-- vim.g.colors_name = 'gruvbox'
+vim.g.neon_style = "default" -- "doom", "dark", "light"
+vim.g.neon_italic_keyword = true
+vim.g.neon_italic_function = true
+vim.g.neon_transparent = true
+vim.cmd([[ colorscheme neon ]])
+
 vim.g.indentLine_enabled = false
 
 --vim.cmd [[highlight Normal ctermbg=None]]
