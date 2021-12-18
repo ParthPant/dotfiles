@@ -17,11 +17,11 @@ vim.opt.scrolloff = 5
 vim.opt.hlsearch = false
 
 -- vim.g.colors_name = 'gruvbox'
-vim.g.neon_style = "default" -- "doom", "dark", "light"
+--[[ vim.g.neon_style = "default" -- "doom", "dark", "light"
 vim.g.neon_italic_keyword = true
 vim.g.neon_italic_function = true
-vim.g.neon_transparent = true
-vim.cmd([[ colorscheme neon ]])
+vim.g.neon_transparent = true ]]
+vim.cmd([[ colorscheme gruvbox ]])
 
 vim.g.indentLine_enabled = false
 
@@ -82,3 +82,6 @@ vim.g.symbols_outline = {
         TypeParameter = {icon = "𝙏", hl = "TSParameter"}
     }
 }
+
+-- gui settings
+vim.cmd([[ set guifont=RobotoMono\ Nerd\ Font\ Mono:h10 ]])
