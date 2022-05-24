@@ -105,7 +105,7 @@ cmp.setup {
 -- tree sitter configs
 local tsconfig = require'nvim-treesitter.configs'
 tsconfig.setup {
-  ensure_installed = "maintained",
+  ensure_installed = {"c", "rust", "lua", "python", "cpp", "javascript"},
   highlight = {
     enable = true,
   },
