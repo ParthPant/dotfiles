@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rls', 'pyright', 'tsserver', 'cmake', 'dockerls', 'hls' }
+local servers = { 'clangd', 'rls', 'pyright', 'tsserver', 'cmake', 'dockerls', 'hls', 'sumneko_lua'}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
