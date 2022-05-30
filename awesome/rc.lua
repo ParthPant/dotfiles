@@ -108,7 +108,7 @@ local gray       = "#858585"
 local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock(markup(gray, " %a") .. markup(white, " %d ") .. markup(gray, "%b ") ..  markup(white, "%H:%M "))
+local mytextclock = wibox.widget.textclock(markup(gray, " %a") .. markup(white, " %d ") .. markup(gray, "%b ") ..  markup(white, "%I:%M ") .. markup(gray, "%p "))
 lain.widget.cal {
     attach_to =  { mytextclock },
     notification_preset = {
