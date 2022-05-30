@@ -1,5 +1,3 @@
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
@@ -14,20 +12,22 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+local freedesktop = require("freedesktop")
+local lain = require("lain")
+
 local HOME = os.getenv("HOME")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
-
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -41,12 +41,12 @@ do
                          text = tostring(err) })
         in_error = false
     end)
-end -- }}}
+end
+-- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.font = "RobotoMono Nerd Font 12"
+beautiful.init(HOME .. "/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "alacritty"
@@ -61,25 +61,12 @@ local fileexplorer = "thunar"
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 local modkey = "Mod4"
+local altkey = "mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -93,26 +80,53 @@ local myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-local mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+local mymainmenu = freedesktop.menu.build({
+    before = {
+        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+    },
+    after  = {
+        { "Open terminal", terminal }
+    }
+})
 
 local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+-- {{{ Wibox
+local markup     = lain.util.markup
+local separators = lain.util.separators
+local white      = beautiful.fg_focus
+local gray       = "#858585"
+-- }}}
+
+-- {{{ Wibar
+
 -- Keyboard map indicator and switcher
 local mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock("%a %b %d, %I:%M %p")
-local month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach( mytextclock, "tr", {on_hover=false} )
+local mytextclock = wibox.widget.textclock(markup(gray, " %a") .. markup(white, " %d ") .. markup(gray, "%b ") ..  markup(white, "%H:%M "))
+lain.widget.cal {
+    attach_to =  { mytextclock },
+    notification_preset = {
+        font = "RobotoMono Nerd Font 10",
+        fg   = "#FFFFFF",
+        bg   = "#00000040"
+    }
+}
+local myawesomeicon = wibox.widget{
+    image = beautiful.awesome_icon,
+    widget = wibox.widget.imagebox
+}
+
+-- Separators
+local space = wibox.widget.textbox('<span font="Tamsyn 4"> </span>')
+local arrl_pre = separators.arrow_right("alpha", beautiful.get().bg_focus)
+local arrl_post = separators.arrow_right(beautiful.get().bg_focus, "alpha")
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -208,16 +222,21 @@ awful.screen.connect_for_each_screen(function(s)
         opacity = 1,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            myawesomeicon,
+            -- mylauncher,
             s.mytaglist,
+            arrl_pre,
             s.mylayoutbox,
+            arrl_post,
             s.mypromptbox,
+            space,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            space,
             mytextclock,
         },
     }
@@ -225,11 +244,11 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
--- root.buttons(gears.table.join(
---     awful.button({ }, 3, function () mymainmenu:toggle() end),
---     awful.button({ }, 4, awful.tag.viewnext),
---     awful.button({ }, 5, awful.tag.viewprev)
--- ))
+root.buttons(gears.table.join(
+   awful.button({ }, 3, function () mymainmenu:toggle() end)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
+))
 -- }}}
 
 -- {{{ Key bindings
@@ -247,7 +266,7 @@ local customkeys = gears.table.join(
               {description="open internet browser", group="awesome"}),
     awful.key({modkey,            }, "o", function() awful.spawn(fileexplorer) end,
               {description="open file explorer", group="awesome"}),
-    awful.key({modkey,     "Shift"}, "q", function() awful.spawn.with_shell(os.getenv("HOME") .. "/.config/awesome/quit.sh") end,
+    awful.key({modkey,     "Shift"}, "q", function() awful.spawn.with_shell(HOME .. "/.config/awesome/quit.sh") end,
               {description="Quit session", group="awesome"}),
     awful.key({ modkey },            "p",     function () awful.util.spawn("rofi -show drun") end,
               {description = "run prompt", group = "launcher"})
@@ -611,7 +630,8 @@ awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("picom --no-fading-openclose --fade-in-step=1 --fade-out-step=1 --fade-delta=0 --experimental-backends")
 awful.spawn.with_shell("mailspring -b")
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("/home/parth/.config/volumeicon/launch.sh")
+awful.spawn.with_shell(HOME .. "/.config/volumeicon/launch.sh")
 awful.spawn.with_shell("xfce4-power-manager")
-awful.spawn.with_shell("/home/parth/.config/awesome/polkit.sh")
+awful.spawn.with_shell(HOME .. "/.config/awesome/polkit.sh")
 awful.spawn.with_shell("blueman-applet")
+awful.spawn.with_shell("unclutter --root")
