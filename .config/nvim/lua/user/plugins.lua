@@ -12,6 +12,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require("packer").startup(function(use)
+	use("christoomey/vim-tmux-navigator")
 	use("wbthomason/packer.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("nmac427/guess-indent.nvim")
