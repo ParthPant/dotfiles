@@ -12,9 +12,10 @@ vim.opt.expandtab = false
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 5
 
-vim.g.mapleader = ","
-vim.g.netrw_banner = 0
+vim.g.netrw_banner = false
 vim.g.netrw_winsize = 30
+
+vim.g.mapleader = ","
 
 -- vimscript
 vim.cmd("colorscheme nordfox")

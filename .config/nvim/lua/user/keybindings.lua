@@ -1,6 +1,5 @@
 -- Keybindings
 vim.keymap.set("n", "<c-s>", "<cmd>write<cr>", { desc = "Save" })
-vim.keymap.set("n", "<space><space>", "<cmd>:NvimTreeToggle<cr>", { desc = "Open nvim-tree" })
 vim.keymap.set({ "n", "x" }, "cp", '"+y', { desc = "Copy to Clipboard" })
 vim.keymap.set({ "n", "x" }, "cv", '"+p', { desc = "Paste from Clipboard" })
 vim.keymap.set("n", "<leader>f", "<cmd>:Format<cr>", { desc = "Format Buffer" })
@@ -9,6 +8,8 @@ vim.keymap.set("n", "<leader>f", "<cmd>:Format<cr>", { desc = "Format Buffer" })
 -- vim.keymap.set("n", "<c-j>", "<c-w>j")
 -- vim.keymap.set("n", "<c-k>", "<c-w>k")
 -- vim.keymap.set("n", "<c-l>", "<c-w>l")
+
+vim.keymap.set("n", "<space><space>", "<cmd> Lexplore<CR>")
 
 vim.keymap.set("n", "<c-h>", "<cmd> TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<c-j>", "<cmd> TmuxNavigateDown<CR>")

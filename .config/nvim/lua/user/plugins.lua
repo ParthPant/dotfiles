@@ -17,7 +17,6 @@ require("packer").startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use("nmac427/guess-indent.nvim")
 	use("numToStr/Comment.nvim")
-	use("akinsho/toggleterm.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("windwp/nvim-autopairs")
 	use("nvim-treesitter/nvim-treesitter")
@@ -26,12 +25,6 @@ require("packer").startup(function(use)
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-	})
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons",
-		},
 	})
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -92,9 +85,6 @@ require("packer").startup(function(use)
 	end
 end)
 
-require("nvim-tree").setup({
-	sync_root_with_cwd = true,
-})
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
@@ -116,11 +106,6 @@ require("nvim-treesitter.configs").setup({
 require("guess-indent").setup()
 require("Comment").setup()
 require("telescope").setup()
-require("toggleterm").setup({
-	open_mapping = "<C-g>",
-	direction = "horizontal",
-	shade_terminals = true,
-})
 require("gitsigns").setup({
 	signs = {
 		add = { text = "▎" },
