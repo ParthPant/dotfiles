@@ -11,9 +11,14 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 5
+vim.opt.autoread = true
 
-vim.g.netrw_banner = false
-vim.g.netrw_winsize = 30
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
 
 vim.g.mapleader = ","
 

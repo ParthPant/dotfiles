@@ -21,7 +21,12 @@ require("packer").startup(function(use)
 	use("windwp/nvim-autopairs")
 	use("nvim-treesitter/nvim-treesitter")
 	use("mhartington/formatter.nvim")
-
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	})
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -120,3 +125,4 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 require("luatab").setup()
 require("nvim-surround").setup()
+require("nvim-tree").setup()

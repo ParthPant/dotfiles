@@ -9,7 +9,7 @@ vim.keymap.set("n", "<leader>f", "<cmd>:Format<cr>", { desc = "Format Buffer" })
 -- vim.keymap.set("n", "<c-k>", "<c-w>k")
 -- vim.keymap.set("n", "<c-l>", "<c-w>l")
 
-vim.keymap.set("n", "<space><space>", "<cmd> Lexplore<CR>")
+vim.keymap.set("n", "<space><space>", "<cmd> NvimTreeToggle<CR>")
 
 vim.keymap.set("n", "<c-h>", "<cmd> TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<c-j>", "<cmd> TmuxNavigateDown<CR>")
@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
 
 		-- Displays a function's signature information
-		bufmap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+		bufmap("n", "S", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
 
 		-- Renames all references to the symbol under the cursor
 		bufmap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>")

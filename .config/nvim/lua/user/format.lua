@@ -6,6 +6,21 @@ require("formatter").setup({
 	logging = true,
 	log_level = vim.log.levels.WARN,
 	filetype = {
+		cs = {
+			-- require("formatter.filetypes.cs").dotnetformat(),
+			function()
+				return {
+					exe = "dotnet",
+					args = {
+						"format",
+						"whitespace",
+						"--include",
+						vim.fn.expand("%:."),
+					},
+					stdin = false,
+				}
+			end,
+		},
 		go = {
 			require("formatter.filetypes.go").goimports,
 		},
@@ -23,6 +38,9 @@ require("formatter").setup({
 		},
 		java = {
 			require("formatter.filetypes.java").clangformat,
+		},
+		js = {
+			require("formatter.filetypes.javascript").prettier,
 		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
