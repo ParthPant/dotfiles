@@ -42,6 +42,9 @@ require("formatter").setup({
 		js = {
 			require("formatter.filetypes.javascript").prettier,
 		},
+		hs = {
+			require("formatter.filetypes.haskell").formoulu,
+		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},

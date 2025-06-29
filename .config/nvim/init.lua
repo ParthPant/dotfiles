@@ -1,10 +1,10 @@
+require("user.settings")
 require("user.plugins")
 require("user.evil_lualine")
 require("user.language-server")
 require("user.snippets")
 require("user.auto")
 require("user.format")
-require("user.settings")
 require("user.keybindings")
 
 vim.cmd("source" .. vim.fn.stdpath("config") .. "/vim/neovide.vim")

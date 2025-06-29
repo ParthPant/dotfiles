@@ -22,9 +22,20 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- Servers
 -- do I need to put the binaries in the PATH
 mason_config.setup({
-	ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "dockerls", "eslint", "gopls", "omnisharp" },
+	ensure_installed = {
+		"lua_ls",
+		"rust_analyzer",
+		"clangd",
+		"dockerls",
+		"eslint",
+		"gopls",
+		"omnisharp",
+		"pyright",
+		"hls",
+	},
 })
 
+lspconfig["pyright"].setup({})
 lspconfig["metals"].setup({})
 lspconfig["gopls"].setup({})
 lspconfig["clangd"].setup({})

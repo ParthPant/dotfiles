@@ -1,3 +1,7 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.opt.splitright = true
 vim.opt.number = true
 vim.wo.relativenumber = true
 vim.opt.mouse = "a"
